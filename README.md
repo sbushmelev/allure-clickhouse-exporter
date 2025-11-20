@@ -123,6 +123,16 @@ The dashboard uses the following variables:
 - `$Datasource` - ClickHouse datasource
 - `$TZ` - Timezone (default: Europe/Moscow)
 
+### Dashboard Example
+
+Here are some examples of how the Grafana dashboard looks:
+
+![Dashboard Example 1](assets/1.jpg)
+
+![Dashboard Example 2](assets/2.jpg)
+
+![Dashboard Example 3](assets/3.jpg)
+
 ## ⚙️ Configuration
 
 Before using the exporter, you need to create a table in ClickHouse. Execute the following SQL script to create the `test_results` table:

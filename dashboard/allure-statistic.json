@@ -2383,14 +2383,14 @@
           "type": "clickhouse",
           "uid": "$Datasource"
         },
-        "definition": "SELECT \n    distinct arrayJoin(labels).2 as tag_value\nFROM test_results\nWHERE arrayJoin(labels).1 = 'tag'",
+        "definition": "SELECT distinct tag FROM test_results ARRAY JOIN label_tag as tag WHERE tag != '' ORDER BY tag",
         "description": "Allure tag",
         "includeAll": false,
         "label": "Allure tag",
         "multi": true,
         "name": "Tag",
         "options": [],
-        "query": "SELECT \n    distinct arrayJoin(labels).2 as tag_value\nFROM test_results\nWHERE arrayJoin(labels).1 = 'tag'",
+        "query": "SELECT distinct tag FROM test_results ARRAY JOIN label_tag as tag WHERE tag != '' ORDER BY tag",
         "refresh": 1,
         "regex": "",
         "type": "query"
@@ -2405,12 +2405,12 @@
         "type": "datasource"
       },
       {
-        "definition": "SELECT \n    distinct arrayJoin(labels).2 as tag_value\nFROM test_results\nWHERE arrayJoin(labels).1 = 'host'",
+        "definition": "SELECT \n    distinct label_host\nFROM test_results",
         "description": "The name of the host where the test was performed",
         "label": "Host",
         "name": "Host",
         "options": [],
-        "query": "SELECT \n    distinct arrayJoin(labels).2 as tag_value\nFROM test_results\nWHERE arrayJoin(labels).1 = 'host'",
+        "query": "SELECT \n    distinct label_host\nFROM test_results",
         "refresh": 1,
         "regex": "",
         "type": "query"
