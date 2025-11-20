@@ -5,18 +5,6 @@
 
 A powerful tool for exporting Allure test results to ClickHouse database and visualizing test statistics through Grafana dashboards.
 
-## 📋 Table of Contents
-
-- [Overview](#overview)
-- [Features](#features)
-- [Prerequisites](#prerequisites)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Grafana Dashboard](#grafana-dashboard)
-- [Configuration](#configuration)
-- [Examples](#examples)
-- [Contributing](#contributing)
-
 ## 🎯 Overview
 
 **Allure ClickHouse Exporter** is designed to streamline the process of collecting, storing, and analyzing test execution data. It automatically:
@@ -27,7 +15,7 @@ A powerful tool for exporting Allure test results to ClickHouse database and vis
 - Exports data to ClickHouse for efficient storage and querying
 - Provides comprehensive Grafana dashboards for visualization
 
-### Project Structure
+### 📁 Project Structure
 
 ```
 allure-clickhouse-exporter/
@@ -66,22 +54,6 @@ cd allure-clickhouse-exporter
 chmod +x script/export.sh
 ```
 
-3. Ensure you have a ClickHouse table ready. You need to create a `test_results` table in your ClickHouse database. See the [ClickHouse Table Schema](#clickhouse-table-schema) section below for the complete SQL script to create the table.
-
-## 💻 Usage
-
-### Basic Usage
-
-```bash
-./script/export.sh \
-  --dir /path/to/allure/results \
-  --url http://localhost:8123 \
-  -u clickhouse_user \
-  -p clickhouse_password \
-  -d default \
-  --project MyProject
-```
-
 ### Command-Line Options
 
 | Option | Description | Required |
@@ -105,6 +77,8 @@ To see the help message:
 ```
 
 ## 📊 Grafana Dashboard
+
+<a name="grafana-dashboard"></a>
 
 The project includes a pre-configured Grafana dashboard (`dashboard/allure-statistic.json`) that provides:
 
