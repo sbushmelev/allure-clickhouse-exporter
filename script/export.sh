@@ -49,7 +49,7 @@ show_progress() {
 }
 
 show_help() {
-    echo -e "${CYAN}📖 Usage: $0 -d DIRECTORY -u URL -p PASSWORD -U USER -D DATABASE -t TABLE -P PROJECT${NC}"
+    echo -e "${CYAN}📖 Usage: $0 -d DIRECTORY -u URL -p PASSWORD -U USER -D DATABASE -P PROJECT${NC}"
     echo "Combine JSON test result files into a single temporary file and send to ClickHouse"
     echo ""
     echo -e "${YELLOW}Required Options:${NC}"
@@ -58,12 +58,11 @@ show_help() {
     echo "  -p                    ClickHouse password"
     echo "  -u,                   ClickHouse username"
     echo "  -d,                   ClickHouse database name"
-    echo "  -t                    ClickHouse table name"
     echo "  --project             Project name"
     echo "  -h                    Show this help message"
     echo ""
     echo -e "${GREEN}Example:${NC}"
-    echo "  $0 --dir ./test-results --url http://localhost:8123 -p clickhouse_password -u admin -d default -t test_results -project MyProject"
+    echo "  $0 --dir ./test-results --url http://localhost:8123 -p clickhouse_password -u admin -d default -project MyProject"
     echo ""
     echo -e "${RED}Note: All parameters are required!${NC}"
     echo -e "${YELLOW}Output: Temporary file path will be printed at the end${NC}"
@@ -74,7 +73,6 @@ CLICKHOUSE_URL=""
 CLICKHOUSE_PASSWORD=""
 CLICKHOUSE_USER=""
 CLICKHOUSE_DATABASE=""
-CLICKHOUSE_TABLE=""
 PROJECT_NAME=""
 
 while [[ $# -gt 0 ]]; do
@@ -99,10 +97,6 @@ while [[ $# -gt 0 ]]; do
             CLICKHOUSE_DATABASE="$2"
             shift 2
             ;;
-        -t)
-            CLICKHOUSE_TABLE="$2"
-            shift 2
-            ;;
         --project)
             PROJECT_NAME="$2"
             shift 2
@@ -125,7 +119,6 @@ MISSING_PARAMS=()
 [[ -z "$CLICKHOUSE_PASSWORD" ]] && MISSING_PARAMS+=("--p")
 [[ -z "$CLICKHOUSE_USER" ]] && MISSING_PARAMS+=("-u")
 [[ -z "$CLICKHOUSE_DATABASE" ]] && MISSING_PARAMS+=("-d")
-[[ -z "$CLICKHOUSE_TABLE" ]] && MISSING_PARAMS+=("-t")
 [[ -z "$PROJECT_NAME" ]] && MISSING_PARAMS+=("--project")
 
 if [[ ${#MISSING_PARAMS[@]} -gt 0 ]]; then
@@ -210,10 +203,11 @@ log_processing "Sending data to ClickHouse..."
 
 log_info "ClickHouse URL: $CLICKHOUSE_URL"
 log_info "ClickHouse database: $CLICKHOUSE_DATABASE"
-log_info "ClickHouse table: $CLICKHOUSE_TABLE"
 log_info "ClickHouse user: $CLICKHOUSE_USER"
 log_info "Project name: $PROJECT_NAME"
 echo -e "${CYAN}=========================================${NC}"
+
+CLICKHOUSE_TABLE=test_results
 
 FULL_URL="${CLICKHOUSE_URL}/?database=${CLICKHOUSE_DATABASE}&user=${CLICKHOUSE_USER}&password=${CLICKHOUSE_PASSWORD}&query=INSERT%20INTO%20${CLICKHOUSE_TABLE}%20FORMAT%20JSONEachRow"
 
