@@ -127,11 +127,11 @@ The dashboard uses the following variables:
 
 Here are some examples of how the Grafana dashboard looks:
 
-![Dashboard Example 1](assets/1.jpg)
+![Dashboard Example 1](docs/assets/1.jpg)
 
-![Dashboard Example 2](assets/2.jpg)
+![Dashboard Example 2](docs/assets/2.jpg)
 
-![Dashboard Example 3](assets/3.jpg)
+![Dashboard Example 3](docs/assets/3.jpg)
 
 ## ⚙️ Configuration
 
